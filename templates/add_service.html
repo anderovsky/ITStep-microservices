@@ -2,24 +2,24 @@
 
 {% block content %}
 <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Add New Service</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Pridať novú službu</h2>
     
     <form method="POST">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                Service Title
+                Názov služby
             </label>
             <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                   id="title" name="title" type="text" placeholder="e.g., Piano Tuning" required>
+                   id="title" name="title" type="text" placeholder="napr. stráženie domáceho maznáčika..." required>
         </div>
         
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
-                Description
+                Popis
             </label>
             <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                       id="description" name="description" rows="4" 
-                      placeholder="Describe your service in detail..." required></textarea>
+                      placeholder="Detailne popíšte obsah služby..." required></textarea>
         </div>
         
         <div class="mb-6">
@@ -33,11 +33,11 @@
         <div class="flex space-x-4">
             <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md" 
                     type="submit">
-                Add Service
+                Pridať službu
             </button>
             <a href="{{ url_for('index') }}" 
                class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md text-center">
-                Cancel
+                Zrušiť
             </a>
         </div>
     </form>

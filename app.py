@@ -60,10 +60,10 @@ def login():
 
         if user and check_password_hash(user.password, password):
             login_user(user)
-            flash('Login successful!')
+            flash('Ste úspešne prihlásený')
             return redirect(url_for('index'))
         else:
-            flash('Invalid email or password')
+            flash('Nesprávne meno alebo heslo')
 
     return render_template('login.html')
 
@@ -72,7 +72,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    flash('Boli ste odhlásený')
     return redirect(url_for('index'))
 
 
@@ -93,7 +93,7 @@ def add_service():
         db.session.add(service)
         db.session.commit()
 
-        flash('Service added successfully!')
+        flash('Služba úspešne pridaná')
         return redirect(url_for('index'))
 
     return render_template('add_service.html')
@@ -123,13 +123,13 @@ def add_review(service_id):
 
     # Check if user is trying to review their own service
     if service.user_id == current_user.id:
-        flash('You cannot review your own service!')
+        flash('Svoju službu nemôžete hodnotiť')
         return redirect(url_for('service_detail', service_id=service_id))
 
     # Check if user already reviewed this service
     existing_review = Review.query.filter_by(user_id=current_user.id, service_id=service_id).first()
     if existing_review:
-        flash('You have already reviewed this service!')
+        flash('Túto službu ste už hodnotili')
         return redirect(url_for('service_detail', service_id=service_id))
 
     rating = int(request.form['rating'])
@@ -144,8 +144,12 @@ def add_review(service_id):
     db.session.add(review)
     db.session.commit()
 
-    flash('Review added successfully!')
+    flash('Hodnotenie úspešne pridané')
     return redirect(url_for('service_detail', service_id=service_id))
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 # Create tables

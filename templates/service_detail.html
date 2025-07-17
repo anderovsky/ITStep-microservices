@@ -5,15 +5,15 @@
     <!-- Service Details -->
     <div class="bg-white rounded-lg shadow-md p-6 mb-6">
         <div class="flex justify-between items-start mb-4">
-            <h1 class="text-3xl font-bold text-gray-900">{{ service.title }}</h1>
-            <span class="text-3xl font-bold text-green-600">${{ "%.2f"|format(service.price) }}</span>
+            <h1 class="text-3xl font-bold text-teal-900">{{ service.title }}</h1>
+            <span class="text-3xl font-bold text-green-600">{{ "%.2f"|format(service.price) }} €</span>
         </div>
         
         <p class="text-gray-600 mb-4">{{ service.description }}</p>
         
         <div class="flex items-center justify-between text-sm text-gray-500">
-            <span>Provided by: <strong>{{ service.provider.name }}</strong></span>
-            <span>Added: {{ service.created_at.strftime('%B %d, %Y') }}</span>
+            <span>Vytvoril: <strong>{{ service.provider.name }}</strong></span>
+            <span>Dátum pridania: {{ service.created_at.strftime('%B %d, %Y') }}</span>
         </div>
         
         <!-- Rating Display -->
@@ -42,7 +42,7 @@
         {% set user_reviewed = reviews|selectattr('user_id', 'equalto', current_user.id)|list %}
         {% if not user_reviewed %}
             <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Leave a Review</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Ohodnoť službu</h3>
                 
                 <form method="POST" action="{{ url_for('add_review', service_id=service.id) }}">
                     <div class="mb-4">
@@ -64,7 +64,7 @@
                     
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="comment">
-                            Comment (optional)
+                            Komentár (nepovinné)
                         </label>
                         <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                   id="comment" name="comment" rows="3" 
@@ -73,7 +73,7 @@
                     
                     <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md" 
                             type="submit">
-                        Submit Review
+                        Odoslať hodnotenie
                     </button>
                 </form>
             </div>
@@ -83,7 +83,7 @@
     <!-- Reviews List -->
     <div class="bg-white rounded-lg shadow-md p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">
-            Reviews ({{ reviews|length }})
+            Hodnotenie ({{ reviews|length }})
         </h3>
         
         {% if reviews %}
@@ -117,7 +117,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p class="text-gray-500">No reviews yet. Be the first to review this service!</p>
+            <p class="text-gray-500">Žiadne hodnotenia. Pridaj ako prvý.</p>
         {% endif %}
     </div>
 </div>

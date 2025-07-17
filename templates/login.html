@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Login</h2>
+    <h2 class="text-2xl font-bold text-center text-teal-900 mb-6">Prihlásenie</h2>
     
     <form method="POST">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                Email
+                E-mail
             </label>
             <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                    id="email" name="email" type="email" required>
@@ -15,21 +15,21 @@
         
         <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                Password
+                Heslo
             </label>
             <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                    id="password" name="password" type="password" required>
         </div>
         
-        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md" 
+        <button class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-md"
                 type="submit">
-            Login
+            Prihlásiť
         </button>
     </form>
     
     <p class="text-center text-gray-600 mt-4">
-        Don't have an account? 
-        <a href="{{ url_for('register') }}" class="text-blue-500 hover:text-blue-600">Register here</a>
+        Nie ste registrovaní?
+        <a href="{{ url_for('register') }}" class="text-teal-500 hover:text-teal-800">Zaregistrovať</a>
     </p>
 </div>
 {% endblock %}
