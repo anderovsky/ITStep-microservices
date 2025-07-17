@@ -4,37 +4,40 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True, nullable=False)
-    password = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    password = db.Column(db.String(60), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    #relationships
-    services = db.relationship('Services', backref='provider', lazy='dynamic')
-    reviews = db.relationship('Reviews', backref='reviewer', lazy='dynamic')
+    # Relationships
+    services = db.relationship('Service', backref='provider', lazy=True)
+    reviews = db.relationship('Review', backref='reviewer', lazy=True)  # Changed from 'Reviews' to 'Review'
+
 
 class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # foreign key
+    # Foreign key
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    # relationships
-    reviews = db.relationship('Review', db.ForeignKey('user.id'), lazy='dynamic')
+    # Relationships
+    reviews = db.relationship('Review', backref='service', lazy=True, cascade='all, delete-orphan')
+
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.String(255), nullable=False)
-    comment = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    rating = db.Column(db.Integer, nullable=False)  # 1-5 stars
+    comment = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # foreign key
+    # Foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey('service.id'), nullable=False)
 
