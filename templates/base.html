@@ -52,9 +52,12 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-teal-200 text-teal-950 shadow p-4 flex justify-between sticky bottom-0 mt-auto">
-        <p>Copypright 2025 SkillApp</p>
-        <a class="font-bold text-teal-950 hover:text-teal-500" href="{{ url_for('about') }}">O projekte</a>
-    </footer>
+    <div class="bg-teal-200 text-teal-950 shadow p-4 mt-8">
+        <footer class="flex justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p>Copypright 2025 SkillApp</p>
+            <a class="font-bold text-teal-950 hover:text-teal-500" href="{{ url_for('about') }}">O projekte</a>
+        </footer>
+    </div>
+
 </body>
 </html>
